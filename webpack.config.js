@@ -10,12 +10,8 @@ module.exports = {
     devServer: {
        contentBase: "./scripts" 
     },
-    
     plugins: [
-        new webpack.ProvidePlugin({
-            $: 'jquery',
-            jQuery: 'jquery'
-        })
+       //custome plugins.
     ],
     module:{
         rules: [
