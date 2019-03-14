@@ -1,5 +1,5 @@
 const path = require('path');
-// const HtmlWebpackPlugin = require('html-webpack-plugin');
+
 
 module.exports = {
     entry: ['@babel/polyfill', './temp/js/index.js'],
@@ -10,13 +10,13 @@ module.exports = {
     devServer: {
        contentBase: "./scripts" 
     },
-    //building html template 
-    // plugins: [
-    //     new HtmlWebpackPlugin({
-    //         filename: 'index.html',
-    //         template: './js/index.html'
-    //     })
-    // ],
+    
+    plugins: [
+        new webpack.ProvidePlugin({
+            $: 'jquery',
+            jQuery: 'jquery'
+        })
+    ],
     module:{
         rules: [
             {
