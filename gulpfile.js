@@ -4,7 +4,8 @@ var gulp = require("gulp"),
     sass = require('gulp-sass'),
     sourcemaps = require('gulp-sourcemaps'),
     cssmin = require('gulp-cssnano'),
-    rename = require('gulp-rename');
+    rename = require('gulp-rename'),
+    webpack = require('webpack');
 
 var prefixerOptions = {
     browsers: ["last 2 versions"]
@@ -34,7 +35,23 @@ gulp.task("style", function(){
         .pipe(gulp.dest("./styles/"));
 });
 
+//webpack config
+gulp.task('scripts', function(callback){
+    webpack(require('./webpack.config'), function(err, stats){
+        if(err){
+            console.log(err.toString());
+        }
+        console.log(stats.toString());
+        callback();
+    });
+});
+
+
+
+
+//WATCH Tasks
 gulp.task("watch", function(){
     gulp.watch('./temp/sass/**/*.scss',gulp.series('style'));
+    gulp.watch('./temp/js/**/*.js', gulp.series('scripts'));
 });
 
